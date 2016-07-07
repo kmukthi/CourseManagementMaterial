@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='lib/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/lib/angular-material/angular-material.css' />
+    <script type="text/javascript" src="/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
+    <script src="/lib/angular-aria/angular-aria.js"></script>
+    <script src="/lib/angular-animate/angular-animate.js"></script>
+    <script src="/lib/angular-material/angular-material.js"></script>
+    <script src="/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="/scripts/application.js"></script>
+    <script type="text/javascript" src="/scripts/directives/maincontent.client.directve.js"></script>
+    <script type="text/javascript" src="/scripts/controllers/maincontent.client.controller.js"></script>
+  </head>
+  <body ng-app="posteroHack">
+  	<% if(success){%>
+	    <main-content></main-content
+  	<%} else{%>
+  		<%=msg%>
+  	<%}%>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<div ng-controller = "AppCtrl">
+<md-content>
+	<md-toolbar class="md-hue-2">
+		<div class="md-toolbar-tools">
+		  <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+		    <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+		  </md-button>
+		  <h2>
+		    <a href="#" ng-click="rightSideContentUrl = 'landing'"><span>Welcome Examiner</span></a>
+		  </h2>
+		  <span flex></span>
+		  <md-button class="md-icon-button" aria-label="Favorite">
+		    <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
+		  </md-button>
+		  <md-button class="md-icon-button" aria-label="More">
+		    <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+		  </md-button>
+		</div>
+	</md-toolbar>
+</md-content>
+<div  layout="column" style="height:500px;" ng-cloak>
+  <section layout="row" flex>
+    <md-sidenav
+        class="md-sidenav-left"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-disable-backdrop
+        md-whiteframe="4">
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Select </h1>
+      </md-toolbar>
+      <md-content layout-padding ng-controller="LeftCtrl">
+        <md-button ng-click="close()" class="md-primary" hide-gt-md>
+          Close Sidenav Left
+        </md-button>
+        <p show-gt-md>
+          <uib-tabset active="2" vertical="true" type="pills">
+		    <uib-tab index="0" heading="Add Questionnare" ng-click="selectExaminerOperation('add-questionnare')"></uib-tab>
+		    <uib-tab index="1" heading="Evaluate Courses" ng-click="selectExaminerOperation('evaluate-course')"></uib-tab>
+		  </uib-tabset>
+        </p>
+      </md-content>
+    </md-sidenav>
+    <md-content flex layout-padding>
+      <div layout="column" layout-fill layout-align="top">
+        <div class="animate-switch-container"
+	    	ng-switch on="rightSideContentUrl">
+	      	<div class="animate-switch" ng-switch-when="landing">
+	      		<landing-page></landing-page>
+	      	</div>
+	      	<div class="animate-switch" ng-switch-when="add-questionnare">
+	      		<questionnare-page></questionnare-page>
+	      	</div>
+	      	<div class="animate-switch" ng-switch-when="evaluate-course">
+	      		<course-evaluate-page></course-evaluate-page>
+	      	</div>
+	      	<div class="animate-switch" ng-switch-default>default</div>
+	  	</div>
+        <div>
+          <md-button ng-click="toggleLeft()"
+            class="md-primary" hide-gt-md>
+            Toggle left
+          </md-button>
+        </div>
+        <div>
+          <md-button ng-click="toggleRight()"
+            ng-hide="isOpenRight()"
+            class="md-primary">
+            Toggle right
+          </md-button>
+        </div>
+      </div>
+      <div flex></div>
+    </md-content>
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+      <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Sidenav Right</h1>
+      </md-toolbar>
+      <md-content ng-controller="RightCtrl" layout-padding>
+        <form>
+          <md-input-container>
+            <label for="testInput">Test input</label>
+            <input type="text" id="testInput"
+                   ng-model="data" md-autofocus>
+          </md-input-container>
+        </form>
+        <md-button ng-click="close()" class="md-primary">
+          Close Sidenav Right
+        </md-button>
+      </md-content>
+    </md-sidenav>
+  </section>
+</div>
+</div>
+<!-- <footer>
+        <div layout="row" layout-align="center center">
+            <h2>My Awesome Footer</h2>
+        </div>
+</footer> -->

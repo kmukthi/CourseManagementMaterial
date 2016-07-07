@@ -1,0 +1,117 @@
+<div ng-if="chooseCourse">
+		<div layout="column" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak class="md-inline-form">
+			<div ng-cloak layout-gt-sm="row" layout="column">
+				<div flex-gt-sm="50" flex>
+					<md-toolbar layout="row" class="md-hue-3">
+						<div class="md-toolbar-tools">
+							<span>Choose Course</span>
+						</div>
+					</md-toolbar>
+					<md-content>
+			    	<md-list flex>
+			    		<md-subheader class="md-no-sticky">Choose a subject to update questions</md-subheader>
+			    		<div layout="row">
+		            		<strong flex>Course</strong>
+		            		<strong flex>Instructor</strong>
+		            	</div>
+			    		<md-list-item class="md-3-line" ng-repeat="course in courseNames" ng-click="courseClick(course)">
+			    			<div class="md-list-item-text" layout="column">
+				            <h4>
+				            	<div layout="row">
+				            		<div flex>{{ course._id }} </div>
+				            		<div flex>{{ course.instructor }} </div>
+				            	</div>
+				            	<div layout="row">
+				            	</div>
+				            	<p class="question-operations">
+	      							<a href="#" ng-click="removeCourse(course,$event)">
+	      								<span class="glyphicon glyphicon-remove"></span>
+	      							</a>
+	      							<a href="#" ng-click="editCourse(course,$event)">
+	      								<span class="glyphicon glyphicon-edit"></span>
+	      							</a>
+				            	</p>
+				            </h4>
+				          </div>
+			    		</md-list-item>
+			    	</md-list>
+			    </md-content>
+				</div>
+			</div>
+		</div>
+</div>
+<div ng-if="!chooseCourse" id="popupContainer">
+	<div layout="column" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak class="md-inline-form">
+		<div ng-cloak layout-gt-sm="row" layout="column">
+			<div flex-gt-sm="50" flex>
+				<md-toolbar layout="row" class="md-hue-3">
+			      <div class="md-toolbar-tools">
+			        <span>Saved</span>
+			        <!-- <p class="question-operations">
+				        <a href="#" ng-click="saveQuestionnare()">
+							<span class="glyphicon glyphicon-floppy-save"></span>
+						</a>
+					</p> -->
+					<span flex></span>
+					<md-button class="md-icon-button" aria-label="Favorite" ng-click = "saveQuestionnare($event)">
+					    <md-icon style="color: #F9F6F6;"><span class="glyphicon glyphicon-floppy-save"></span></md-icon>
+					</md-button>
+			      </div>
+			    </md-toolbar>
+			    <md-content>
+			    	<md-list flex>
+			    		<md-subheader class="md-no-sticky">Subject : {{selectedCourseName["_id"]}}</md-subheader>
+			    		<md-list-item class="md-3-line" ng-repeat="question in addedQuestions" ng-click="questionClick($index)">
+			    			<div class="md-list-item-text" layout="column">
+				            <h4>
+				            	<div ng-if = "question.state_edit">
+									<md-input-container class="md-block">
+							          <input ng-model="question.value">
+							        </md-input-container>
+							        <p class="question-operations">
+		      							<a href="#" ng-click="performUpdate($index)">
+		      								<span class="glyphicon glyphicon-save"></span>
+		      							</a>
+					            	</p>
+				            	</div>
+				            	<div ng-if = "!question.state_edit">
+					            	<strong>{{ question.value }}</strong>
+					            	<p class="question-operations">
+		      							<a href="#" ng-click="removeQuestion($index)">
+		      								<span class="glyphicon glyphicon-remove"></span>
+		      							</a>
+		      							<a href="#" ng-click="editQuestion($index)">
+		      								<span class="glyphicon glyphicon-edit"></span>
+		      							</a>
+					            	</p>
+				            	</div>
+				            </h4>
+				          </div>
+			    		</md-list-item>
+			    	</md-list>
+			    </md-content>
+			</div>
+		</div>
+		
+		<md-whiteframe class="md-whiteframe-6dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" ng-click="questionClick('new')">
+			<md-content layout-padding>
+				<div>
+						<md-input-container class="md-block">
+				          <label class="question-label"><strong>New Question</strong></label>
+				          <input ng-model="newQuestion.value">
+				        </md-input-container>
+				</div>
+			</md-content>
+		</md-whiteframe>
+		<md-whiteframe ng-if = "testQ == 'new'" class="md-whiteframe-6dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
+			<div ng-if="addedQuestions.length<20">
+				<a href="#" ng-click=addQuestion()>
+					<span class="glyphicon glyphicon-plus"></span>
+				</a>
+			</div>
+			<div ng-if="addedQuestions.length>=20">
+				<span style="color: red;">Cannot add more than 3</span>
+			</div>
+		</md-whiteframe>
+	</div>
+</div>
